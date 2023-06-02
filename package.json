@@ -11,7 +11,6 @@
 	},
 	"dependencies": {
 		"@rainbow-me/rainbowkit": "^0.12.14",
-		"@wagmi/core": "4.14.5",
 		"ethers": "^5.7.2",
 		"localforage": "^1.10.0",
 		"match-sorter": "^6.3.1",

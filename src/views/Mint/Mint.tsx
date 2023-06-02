@@ -10,7 +10,7 @@ import { ethers, BigNumber } from "ethers";
 import { convertHexToDecimal } from "../../utils/convertHexToDecimal";
 
 const Mint = () => {
-	const [totalSupply, setTotalSupply] = useState<number>(0);
+	const [_, setTotalSupply] = useState<number>(0);
 	const [mintAmount, setMintAmount] = useState<string>("");
 
 	const { data: signer } = useSigner();
@@ -22,7 +22,7 @@ const Mint = () => {
 			signer!
 		);
 
-		const decimalValue = ethers.utils.parseUnits(mintAmount, 18); // Convert mintAmount to decimal value
+		// const decimalValue = ethers.utils.parseUnits(mintAmount, 18); // Convert mintAmount to decimal value
 
 		const mint = await parallaxContract.safeMint(
 			BigNumber.from(mintAmount),

@@ -3,14 +3,17 @@ import { ChangeEvent, useCallback, useEffect, useState } from "react";
 
 import parallaxABI from "./../../abi/parallaxABI.json";
 
-import { useSigner } from "wagmi";
+import { useAccount, useSigner } from "wagmi";
 
-import Container from "../../components/Container/Container";
 import { ethers, BigNumber } from "ethers";
 import { convertHexToDecimal } from "../../utils/convertHexToDecimal";
 
+import Container from "../../components/Container/Container";
+import NotConnected from "../../components/NotConnected/NotConnected";
+
 const Mint = () => {
-	const [_, setTotalSupply] = useState<number>(0);
+	const { isConnected } = useAccount();
+	const [totalSupply, setTotalSupply] = useState<number>(0);
 	const [mintAmount, setMintAmount] = useState<string>("");
 
 	const { data: signer } = useSigner();
@@ -34,10 +37,12 @@ const Mint = () => {
 	};
 
 	const fetchTotalSupply = useCallback(async () => {
+		const provider = ethers.getDefaultProvider("sepolia");
+
 		const parallaxContract = new ethers.Contract(
 			"0xe63434289AB72602f4b446e00e716206c9A9B97a",
 			parallaxABI,
-			signer!
+			provider
 		);
 
 		const totalSupply = await parallaxContract.totalSupply();
@@ -49,10 +54,13 @@ const Mint = () => {
 		fetchTotalSupply();
 	}, [fetchTotalSupply]);
 
+	if (!isConnected) return <NotConnected />;
+
 	return (
 		<div className='py-5'>
-			<Container className='mt-32 flex justify-center'>
-				<div className='flex w-full flex-col sm:w-1/2 sm:flex-row'>
+			<Container>
+				<div> Total supply: {totalSupply} </div>
+				<div className='mt-5 flex'>
 					<input
 						value={mintAmount}
 						onChange={(e: ChangeEvent) =>
@@ -60,7 +68,7 @@ const Mint = () => {
 						}
 						type='text'
 						placeholder='Mint amount'
-						className='w-full rounded-none border border-gray-700 bg-black px-3 py-2.5 text-white outline-none placeholder:translate-y-[2px] sm:rounded-l-md'
+						className='w-full rounded-none border border-gray-700 bg-black px-3 py-2.5 text-white outline-none placeholder:translate-y-[2px] sm:w-[500px] sm:rounded-l-md'
 					/>
 					<button
 						className='mt-5 w-full bg-primary py-2.5 font-semibold text-black duration-200 sm:mt-0 sm:w-[200px]'

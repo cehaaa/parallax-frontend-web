@@ -4,6 +4,7 @@ import { useAccount } from "wagmi";
 
 import Container from "../../components/Container/Container";
 import DisconnectButton from "../../components/DisconnectButton/DisconnectButton";
+import NotConnected from "../../components/NotConnected/NotConnected";
 
 import { ethers } from "ethers";
 
@@ -61,9 +62,7 @@ const Wallet = () => {
 						</div>
 					</Container>
 				) : (
-					<Container>
-						<div>Connect to your wallet</div>
-					</Container>
+					<NotConnected />
 				)}
 			</div>
 		</>

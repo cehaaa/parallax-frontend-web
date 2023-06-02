@@ -1,3 +1,3 @@
 # How to run application internally
-`npm install`
+`npm install` \n
 `npm run dev`

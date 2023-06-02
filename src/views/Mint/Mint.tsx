@@ -54,29 +54,31 @@ const Mint = () => {
 		fetchTotalSupply();
 	}, [fetchTotalSupply]);
 
-	if (!isConnected) return <NotConnected />;
-
 	return (
 		<div className='py-5'>
-			<Container>
-				<div> Total supply: {totalSupply} </div>
-				<div className='mt-5 flex'>
-					<input
-						value={mintAmount}
-						onChange={(e: ChangeEvent) =>
-							setMintAmount((e.target as HTMLInputElement).value)
-						}
-						type='text'
-						placeholder='Mint amount'
-						className='w-full rounded-none border border-gray-700 bg-black px-3 py-2.5 text-white outline-none placeholder:translate-y-[2px] sm:w-[500px] sm:rounded-l-md'
-					/>
-					<button
-						className='mt-5 w-full bg-primary py-2.5 font-semibold text-black duration-200 sm:mt-0 sm:w-[200px]'
-						onClick={() => mintAction()}>
-						<div className='mt-1'>Mint</div>
-					</button>
-				</div>
-			</Container>
+			{isConnected ? (
+				<Container>
+					<div> Total supply: {totalSupply} </div>
+					<div className='mt-5 flex'>
+						<input
+							value={mintAmount}
+							onChange={(e: ChangeEvent) =>
+								setMintAmount((e.target as HTMLInputElement).value)
+							}
+							type='text'
+							placeholder='Mint amount'
+							className='w-full rounded-none border border-gray-700 bg-black px-3 py-2.5 text-white outline-none placeholder:translate-y-[2px] sm:w-[500px] sm:rounded-l-md'
+						/>
+						<button
+							className='mt-5 w-full bg-primary py-2.5 font-semibold text-black duration-200 sm:mt-0 sm:w-[200px]'
+							onClick={() => mintAction()}>
+							<div className='mt-1'>Mint</div>
+						</button>
+					</div>
+				</Container>
+			) : (
+				<NotConnected />
+			)}
 		</div>
 	);
 };

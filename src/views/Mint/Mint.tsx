@@ -41,6 +41,7 @@ const Mint = () => {
 		);
 
 		const totalSupply = await parallaxContract.totalSupply();
+
 		setTotalSupply(convertHexToDecimal(totalSupply._hex));
 	}, []);
 

@@ -36,13 +36,13 @@ const Wallet = () => {
 		<>
 			<div className='py-5'>
 				{isConnected ? (
-					<Container className='mt-32'>
-						<div className='flex w-full flex-col items-center space-y-5 '>
-							<div className='text-base tracking-wide sm:text-lg'>
+					<Container className='mt-32 flex justify-center'>
+						<div className='flex w-[200px] flex-col items-center space-y-5'>
+							<div className='text-sm tracking-normal sm:text-lg sm:tracking-wide'>
 								{address}
 							</div>
 
-							<div>
+							<div className='text-sm sm:text-base'>
 								Balance:{" "}
 								<span>
 									{isLoading ? (

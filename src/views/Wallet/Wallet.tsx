@@ -5,8 +5,7 @@ import { useAccount } from "wagmi";
 import Container from "../../components/Container/Container";
 import DisconnectButton from "../../components/DisconnectButton/DisconnectButton";
 
-import { alchemy } from "../../lib/alchemy";
-import { convertHexToDecimal } from "../../utils/convertHexToDecimal";
+import { ethers } from "ethers";
 
 const Wallet = () => {
 	const { address, isConnected } = useAccount();
@@ -17,12 +16,11 @@ const Wallet = () => {
 	const fetchUserBalance = useCallback(async () => {
 		try {
 			setIsLoading(true);
-			const response = await alchemy.core.getBalance(
-				address as string,
-				"latest"
-			);
 
-			setUserBalance(convertHexToDecimal(response!._hex.slice(2)));
+			const provider = ethers.getDefaultProvider("sepolia");
+			const balance = await provider.getBalance(address as string);
+
+			setUserBalance(Number(balance));
 		} catch (error) {
 			console.error(error);
 		} finally {
@@ -39,10 +37,8 @@ const Wallet = () => {
 			<div className='py-5'>
 				{isConnected ? (
 					<Container className='mt-32'>
-						<div className='flex w-full flex-col items-center space-y-5'>
-							{/* <div className='h-52 w-52 rounded-full'></div> */}
-
-							<div className='text-lg font-semibold tracking-wide'>
+						<div className='flex w-full flex-col items-center space-y-5 '>
+							<div className='text-base tracking-wide sm:text-lg'>
 								{address}
 							</div>
 

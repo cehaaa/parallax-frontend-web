@@ -3,7 +3,7 @@ import "@rainbow-me/rainbowkit/styles.css";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 
 // wagmi
-import { configureChains, createConfig, WagmiConfig } from "wagmi";
+import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { sepolia, mainnet } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
@@ -16,7 +16,7 @@ import { AppContext } from "../context/AppContext";
 
 import Header from "./Header/Header";
 
-const { chains, publicClient } = configureChains(
+const { chains, provider } = configureChains(
 	[sepolia, mainnet],
 	[
 		alchemyProvider({ apiKey: import.meta.env.VITE_ALCHEMY_KEY }),
@@ -29,10 +29,10 @@ const { connectors } = getDefaultWallets({
 	chains,
 });
 
-const wagmiConfig = createConfig({
+const wagmiClient = createClient({
 	autoConnect: true,
+	provider,
 	connectors,
-	publicClient,
 });
 
 export const Layout = () => {
@@ -45,7 +45,7 @@ export const Layout = () => {
 
 	return (
 		<>
-			<WagmiConfig config={wagmiConfig}>
+			<WagmiConfig client={wagmiClient}>
 				<RainbowKitProvider chains={chains}>
 					<AppContext.Provider value={AppContextValue}>
 						<div className='flex min-h-screen flex-col bg-black text-white'>

@@ -6,6 +6,8 @@ export default {
 			colors: {
 				black: "#080134",
 				primary: "#01C5BA",
+				secondary: "#393556",
+				"custom-gray": "#CECCD6",
 			},
 		},
 	},

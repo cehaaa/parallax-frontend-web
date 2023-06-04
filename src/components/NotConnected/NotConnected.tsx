@@ -3,7 +3,7 @@ import CustomConnectButton from "../CustomConnectButton/CustomConnectButton";
 
 const NotConnected = () => {
 	return (
-		<Container className='mt-32'>
+		<Container className='pt-32'>
 			<div className='flex w-full flex-col items-center justify-center'>
 				<div className='text-center text-2xl font-semibold'>
 					Connect to your wallet

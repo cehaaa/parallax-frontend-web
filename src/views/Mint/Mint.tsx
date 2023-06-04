@@ -46,7 +46,7 @@ const Mint = () => {
 	if (!isConnected) return <NotConnected />;
 
 	return (
-		<Container className='py-5'>
+		<Container className='pt-32'>
 			<div className='grid grid-cols-1 gap-y-3 sm:grid-cols-2 sm:gap-x-8 '>
 				<div className=' bg-secondary p-5'>
 					<div className='text-base font-medium sm:text-lg'>Public Minted</div>

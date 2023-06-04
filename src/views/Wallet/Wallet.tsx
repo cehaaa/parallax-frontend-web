@@ -19,7 +19,7 @@ const Wallet = () => {
 
 	return (
 		<>
-			<Container className='mt-32 flex justify-center'>
+			<Container className='flex justify-center pt-32'>
 				<div className='flex w-full justify-center'>
 					<div className='w-full space-y-5 bg-secondary p-4 sm:w-[500px] sm:p-5'>
 						<div className='break-words'>

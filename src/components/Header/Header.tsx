@@ -14,7 +14,7 @@ const Header = () => {
 	const [isShowSidebar, setIsShowSidebar] = useState<boolean>(false);
 
 	return (
-		<header className='border-b border-neutral-800 py-5'>
+		<header className='fixed top-0 w-full border-b border-neutral-800 bg-black py-5'>
 			<Container className='grid grid-cols-3 items-center'>
 				<div>
 					<Link to='/' className='text-lg font-bold sm:text-xl'>

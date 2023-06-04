@@ -5,8 +5,8 @@ import CustomConnectButton from "../../components/CustomConnectButton/CustomConn
 
 const Home = () => {
 	return (
-		<div className='flex grow flex-col justify-between py-5'>
-			<Container className='flex flex-col items-center justify-center'>
+		<div className='flex min-h-screen flex-col justify-between '>
+			<Container className='flex grow flex-col items-center justify-center'>
 				<div className='mt-9 text-center text-3xl font-bold uppercase leading-snug sm:mt-32 sm:text-6xl'>
 					the world of <br />
 					<span className='inline-block bg-gradient-to-r from-blue-600 via-cyan-400 to-primary bg-clip-text font-black text-transparent sm:text-6xl'>
@@ -24,12 +24,12 @@ const Home = () => {
 				</div>
 			</Container>
 
-			<div className='border-t border-neutral-800 pt-5 sm:pt-0'>
+			<div className='border-t border-neutral-800 py-5 sm:pt-0'>
 				<Container className='grid w-full grid-cols-1 items-center sm:grid-cols-3'>
-					<Link to='/mint'>
-						<div className='order-2 col-span-2 mt-5 flex h-0 cursor-pointer items-center justify-center bg-primary py-5 text-base font-semibold text-black hover:underline sm:order-1 sm:col-span-1 sm:mt-0 sm:h-[180px] sm:w-[323px] sm:text-2xl '>
-							<div className='mt-1'>Discover more</div>
-						</div>
+					<Link
+						to='/mint'
+						className='order-2 col-span-2 mt-5 flex h-0 cursor-pointer items-center justify-center bg-primary py-5 text-base font-semibold text-black hover:underline sm:order-1 sm:col-span-1 sm:mt-0 sm:h-[180px] sm:w-[323px] sm:text-2xl'>
+						<div className='mt-1'>Discover more</div>
 					</Link>
 
 					<div className='order-1 col-span-1 grid grid-cols-2 gap-5 sm:order-2 sm:col-span-2 sm:grid-cols-4 sm:gap-0'>

@@ -24,7 +24,7 @@ export const Layout = () => {
 		<>
 			<RainbowKitProvider chains={chains}>
 				<AppContext.Provider value={AppContextValue}>
-					<div className='flex min-h-screen flex-col bg-black text-white'>
+					<div className='min-h-screen bg-black text-white'>
 						<Header />
 
 						<Outlet />

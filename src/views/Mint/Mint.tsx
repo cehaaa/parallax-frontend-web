@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { ChangeEvent } from "react";
 
 import {
@@ -14,11 +14,12 @@ import parallaxABI from "./../../abi/parallaxABI.json";
 
 import Container from "../../components/Container/Container";
 import NotConnected from "../../components/NotConnected/NotConnected";
+import { parseEther } from "viem";
 
 const Mint = () => {
 	const { isConnected } = useAccount();
 
-	const [mintAmount, setMintAmount] = useState<string>("0");
+	const [mintAmount, setMintAmount] = useState<string>("1");
 
 	const contractConfig = {
 		address: import.meta.env.VITE_PARALLAX_NETWORK_CONTRACT_ADDRESS,
@@ -28,20 +29,27 @@ const Mint = () => {
 	const { data: totalSupply } = useContractRead({
 		...contractConfig,
 		functionName: "totalSupply",
+		watch: true,
 	});
-
-	const { ceil } = Math;
 
 	const { config: mintConfig } = usePrepareContractWrite({
 		...contractConfig,
 		functionName: "safeMint",
-		args: [Number(ceil(Number(mintAmount) * 0.001))],
+		args: [Number(mintAmount)],
+		value: parseEther(`${Number(mintAmount) * 0.001}`) as any,
 	});
+
 	const {
-		write: mintAction,
+		write: writeAction,
 		isLoading: isMintLoading,
 		isSuccess: isMintSuccess,
 	} = useContractWrite(mintConfig);
+
+	const mintAction = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+
+		if (writeAction) writeAction();
+	};
 
 	if (!isConnected) return <NotConnected />;
 
@@ -63,25 +71,26 @@ const Mint = () => {
 			</div>
 
 			<div className='mt-5 flex flex-col sm:flex-row'>
-				<input
-					value={mintAmount}
-					onChange={(e: ChangeEvent) =>
-						setMintAmount((e.target as HTMLInputElement).value)
-					}
-					type='number'
-					placeholder='Mint amount'
-					className='w-full rounded-none border border-gray-700 bg-black px-3 py-2.5 text-white outline-none placeholder:translate-y-[2px] sm:w-[500px] sm:rounded-l-md'
-				/>
-				<button
-					className='mt-5 w-full bg-primary py-2.5 font-semibold text-black duration-200 sm:mt-0 sm:w-[200px]'
-					onClick={mintAction}>
-					<div className='mt-1'>{isMintLoading ? "Loading..." : "Mint"}</div>
-				</button>
+				<form onSubmit={e => mintAction(e)}>
+					<input
+						min={1}
+						value={mintAmount}
+						onChange={(e: ChangeEvent) =>
+							setMintAmount((e.target as HTMLInputElement).value)
+						}
+						type='number'
+						placeholder='Mint amount'
+						className='w-full rounded-none border border-gray-700 bg-black px-3 py-2.5 text-white outline-none placeholder:translate-y-[2px] sm:w-[500px] sm:rounded-l-md'
+					/>
+					<button className='mt-5 w-full bg-primary py-2.5 font-semibold text-black duration-200 sm:mt-0 sm:w-[200px]'>
+						<div className='mt-1'>{isMintLoading ? "Loading..." : "Mint"}</div>
+					</button>
+				</form>
 			</div>
 
 			<>
 				{isMintSuccess && (
-					<div className='mt-5 text-green-500'>Mint success</div>
+					<div className='mt-3 text-green-500'>Mint success</div>
 				)}
 			</>
 		</Container>

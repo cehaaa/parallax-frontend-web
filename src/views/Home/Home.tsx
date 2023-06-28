@@ -19,12 +19,46 @@ const Home = () => {
 					hand-picked digital artist out there and find the hidden gem.
 				</div>
 
-				<div className='mt-5'>
+				<div className='mt-5 flex items-center'>
 					<CustomConnectButton />
+					<Link
+						to='/mint'
+						className='ml-3 flex items-center justify-center border border-primary px-8 py-2.5 font-semibold duration-200 hover:bg-primary hover:text-black'>
+						<div className='mt-1 tracking-wide'>Start Minting</div>
+					</Link>
 				</div>
 			</Container>
 
-			<div className='border-t border-neutral-800 py-5 sm:pt-0'>
+			<div className='border-t border-neutral-800'>
+				<Container>
+					<div className='grid h-[150px] grid-cols-4 gap-x-5'>
+						<div className='self-center justify-self-center'>
+							<div className='text-2xl font-bold sm:text-5xl'>3.1 m</div>
+							<div className='text-sm text-gray-400 sm:text-base'>
+								Art stored
+							</div>
+						</div>
+						<div className='self-center justify-self-center'>
+							<div className='text-2xl font-bold sm:text-5xl'>250 k</div>
+							<div className='text-sm text-gray-400 sm:text-base'>Rare Art</div>
+						</div>
+						<div className='self-center justify-self-center'>
+							<div className='text-2xl font-bold sm:text-5xl'>148 k</div>
+							<div className='text-sm text-gray-400 sm:text-base'>
+								Professional Artists
+							</div>
+						</div>
+						<div className='self-center justify-self-center'>
+							<div className='text-2xl font-bold sm:text-5xl'>500 k</div>
+							<div className='text-sm text-gray-400 sm:text-base'>
+								Daily active users
+							</div>
+						</div>
+					</div>
+				</Container>
+			</div>
+
+			{/* <div className='border-t border-neutral-800 py-5 sm:pt-0'>
 				<Container className='grid w-full grid-cols-1 items-center sm:grid-cols-3'>
 					<Link
 						to='/mint'
@@ -60,7 +94,7 @@ const Home = () => {
 						</div>
 					</div>
 				</Container>
-			</div>
+			</div> */}
 		</div>
 	);
 };
